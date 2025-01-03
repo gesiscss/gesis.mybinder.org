@@ -19,6 +19,12 @@
   become: true
   roles:
     - k8s-worker
+- name: Configure Load Balancer and Ingress
+  hosts: kubernetes_control_panel
+  gather_facts: false
+  roles:
+    - metallb
+    - ingress
 - name: Configure Harbor on Kubernetes cluster
   hosts: kubernetes_control_panel
   gather_facts: false
