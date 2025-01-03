@@ -20,3 +20,17 @@
     {% endfor %}
     {% endfor %}
   changed_when: false
+- name: Configure orc2-fix-jupyterhub-bot
+  become: true
+  ansible.builtin.import_tasks:
+    file: orc2-fix-jupyterhub-bot.yml
+- name: Configure orc2-fix-dind-bot
+  become: true
+  ansible.builtin.import_tasks:
+    file: orc2-fix-dind-bot.yml
+- name: Configure kill-succeeded-pods
+  ansible.builtin.import_tasks:
+    file: kill-succeeded-pods.yml
+- name: Configure kill-after-timeout-pods
+  ansible.builtin.import_tasks:
+    file: kill-after-timeout-pods.yml
