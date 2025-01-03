@@ -185,6 +185,7 @@
       kind: Ingress
       metadata:
         name: 'ingress-{{ harbor_name }}'
+        namespace: '{{ harbor_name }}'
       spec:
         rules:
           - host: '{{ harbor_domain }}'
