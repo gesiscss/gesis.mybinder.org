@@ -1,0 +1,4 @@
+metallb_version: 0.14.9
+metallb_ip_address_pool_name: "gesis"
+metallb_addresses_begin: 0.0.0.0
+metallb_addresses_end: 0.0.0.0

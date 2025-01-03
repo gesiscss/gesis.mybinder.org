@@ -91,9 +91,6 @@
     set_values:
       - value: "config.token={{ GITLAB_K8S_TOKEN }}"
       - value: config.kasAddress=wss://git.gesis.org/-/kubernetes-agent/
-- name: Add MetalLB to Kubernetes cluster
-  ansible.builtin.import_tasks:
-    file: metallb.yml
 - name: Add Ingress NGINX Controller to Kubernetes cluster
   ansible.builtin.import_tasks:
     file: ingress-nginx.yml
