@@ -19,13 +19,7 @@
   become: true
   roles:
     - k8s-worker
-- name: Configure Kubernetes Persistent Volumes
-  hosts: kubernetes_control_panel
-  gather_facts: false
-  become: true
-  roles:
-    - k8s-pv
-- name: Configure Harbor
+- name: Configure Harbor on Kubernetes cluster
   hosts: kubernetes_control_panel
   gather_facts: false
   roles:
@@ -33,14 +27,23 @@
       vars:
         harbor_domain: '{{ HARBOR_DOMAIN }}'
         harbor_path: '{{ HARBOR_PATH }}'
-- name: Configure JupyterHub workers
-  hosts: jupyterhub_single_user
-  gather_facts: false
-  become: true
-  roles:
-    - k8s-worker
-- name: Configure mybinder.org Kubernetes cluster
+- name: Prepare Kubernetes cluster for mybinder.org
   hosts: kubernetes_control_panel
   gather_facts: false
   roles:
+    - role: prometheus
+      vars:
+        prometheus_capacity_storage: 1Gi
+        prometheus_storage_class: local-storage
+        prometheus_storage_local_path: /orc2_data/prometheus
+    - role: grafana
+      vars:
+        grafana_capacity_storage: 1Gi
+        grafana_storage_class: local-storage
+        grafana_storage_local_path: /orc2_data/grafana
+    - role: jupyterhub
+      vars:
+        jupyterhub_capacity_storage: 1Gi
+        jupyterhub_storage_class: local-storage
+        jupyterhub_storage_local_path: /orc2_data/jupyterhub
     - mybinder
