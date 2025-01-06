@@ -99,7 +99,7 @@
     masked: false
 - name: Copy kubelet configuration file
   ansible.builtin.copy:
-    src: ../var/lib/kubelet/config.yaml
+    src: files/var/lib/kubelet/config.yaml
     dest: /var/lib/kubelet/config.yaml
     owner: root
     group: root
