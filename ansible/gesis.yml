@@ -40,6 +40,7 @@
   roles:
     - role: harbor
       vars:
+        harbor_protocol: http
         harbor_domain: '{{ HARBOR_DOMAIN }}'
         harbor_path: '{{ HARBOR_PATH }}'
 - name: Prepare Kubernetes cluster for mybinder.org

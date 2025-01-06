@@ -7,5 +7,6 @@ harbor_registry_storage: 10Gi
 harbor_redis_storage: 10Gi
 harbor_trivy_storage: 10Gi
 harbor_database_storage: 10Gi
+harbor_protocol: http
 harbor_domain: harbor.localhost
 harbor_path: '/'

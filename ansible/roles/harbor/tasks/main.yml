@@ -157,11 +157,15 @@
     create_namespace: true
     history_max: 3
     values:
+      externalURL: '{{ harbor_protocol }}://{{ harbor_domain }}'
       harborAdminPassword: "{{ HARBOR_ADMIN_PASSWORD }}"
       expose:
         type: ClusterIP
         tls:
           enabled: false
+        ingress:
+          hosts:
+            core: '{{ harbor_domain }}'
       persistence:
         persistentVolumeClaim:
           registry:
