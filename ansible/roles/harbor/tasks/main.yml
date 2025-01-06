@@ -20,7 +20,7 @@
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Delete
-        storageClassName: "{{ harbor_storage_class_name }}"
+        storageClassName: "{{ harbor_storage_class_name }}-jobservice"
         local:
           path: /harbor/jobservice
         nodeAffinity:
@@ -49,7 +49,7 @@
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Delete
-        storageClassName: "{{ harbor_storage_class_name }}"
+        storageClassName: "{{ harbor_storage_class_name }}-registry"
         local:
           path: /harbor/registry
         nodeAffinity:
@@ -78,7 +78,7 @@
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Delete
-        storageClassName: "{{ harbor_storage_class_name }}"
+        storageClassName: "{{ harbor_storage_class_name }}-redis"
         local:
           path: /harbor/redis
         nodeAffinity:
@@ -107,7 +107,7 @@
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Delete
-        storageClassName: "{{ harbor_storage_class_name }}"
+        storageClassName: "{{ harbor_storage_class_name }}-trivy"
         local:
           path: /harbor/trivy
         nodeAffinity:
@@ -136,7 +136,7 @@
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Delete
-        storageClassName: "{{ harbor_storage_class_name }}"
+        storageClassName: "{{ harbor_storage_class_name }}-database"
         local:
           path: /harbor/database
         nodeAffinity:
@@ -169,16 +169,16 @@
       persistence:
         persistentVolumeClaim:
           registry:
-            storageClass: "{{ harbor_storage_class_name }}"
+            storageClass: "{{ harbor_storage_class_name }}-registry"
           jobservice:
             jobLog:
-              storageClass: "{{ harbor_storage_class_name }}"
+              storageClass: "{{ harbor_storage_class_name }}-jobservice"
           database:
-            storageClass: "{{ harbor_storage_class_name }}"
+            storageClass: "{{ harbor_storage_class_name }}-database"
           redis:
-            storageClass: "{{ harbor_storage_class_name }}"
+            storageClass: "{{ harbor_storage_class_name }}-redis"
           trivy:
-            storageClass: "{{ harbor_storage_class_name }}"
+            storageClass: "{{ harbor_storage_class_name }}-trivy"
 
 # Based on https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
 - name: Create a ingress resources
