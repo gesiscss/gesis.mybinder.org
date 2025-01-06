@@ -1,0 +1,16 @@
+- name: Add GitLab Helm repository
+  kubernetes.core.helm_repository:
+    name: gitlab
+    repo_url: https://charts.gitlab.io
+- name: Deploy GitLab agent
+  kubernetes.core.helm:
+    release_name: "gitlab-agent-{{ inventory_file | basename }}"
+    release_namespace: gitlab-agent
+    chart_ref: gitlab/gitlab-agent
+    chart_version: '{{ gitlab_version }}'
+    dependency_update: true
+    create_namespace: true
+    values:
+      config:
+        token: '{{ gitlab_k8s_token }}'
+        kasAddress: wss://git.gesis.org/-/kubernetes-agent/
