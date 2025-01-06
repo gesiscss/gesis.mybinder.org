@@ -10,3 +10,4 @@ harbor_database_storage: 10Gi
 harbor_protocol: http
 harbor_domain: harbor.localhost
 harbor_path: '/'
+harbor_name_tls_secret: letsencrypt

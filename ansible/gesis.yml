@@ -16,6 +16,9 @@
   roles:
     - role: cni
     - role: cert-manager
+      vars:
+        cert_manager_email: methodshub@gesis.org
+        cert_manager_production: false
     - role: metallb
       vars:
         metallb_addresses_begin: '{{ K8S_INGRESS }}'
@@ -41,7 +44,7 @@
     - role: harbor
       vars:
         harbor_storage_class_name: local-storage
-        harbor_protocol: http
+        harbor_protocol: https
         harbor_domain: '{{ HARBOR_DOMAIN }}'
         harbor_path: '{{ HARBOR_PATH }}'
 - name: Prepare Kubernetes cluster for mybinder.org
