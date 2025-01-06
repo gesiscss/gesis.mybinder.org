@@ -242,6 +242,6 @@
         tls:
           - hosts:
               - '{{ harbor_domain }}'
-            secretName: '{{ harbor_name }}-cert'
+            secretName: '{{ harbor_name_tls_secret }}'
         # Don't change the ingressClassName
         ingressClassName: nginx
