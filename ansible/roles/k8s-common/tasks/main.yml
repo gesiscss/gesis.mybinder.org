@@ -97,6 +97,22 @@
     name: containerd
     enabled: true
     masked: false
+- name: Copy kubelet configuration file
+  ansible.builtin.copy:
+    src: ../var/lib/kubelet/config.yaml
+    dest: /var/lib/kubelet/config.yaml
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+- name: Reload kubelet service
+  ansible.builtin.systemd:
+    name: kubelet
+    state: restarted
+- name: Enable kubelet service
+  ansible.builtin.systemd:
+    name: kubelet
+    enabled: true
+    masked: false
 - name: Modify kernel module overlay
   ansible.builtin.command: modprobe overlay
   changed_when: false
