@@ -202,5 +202,40 @@
                       name: '{{ harbor_name }}-portal'
                       port:
                         number: 80
+                - path: '{{ harbor_path }}api'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ harbor_name }}-core'
+                      port:
+                        number: 80
+                - path: '{{ harbor_path }}service'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ harbor_name }}-core'
+                      port:
+                        number: 80
+                - path: '{{ harbor_path }}v2'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ harbor_name }}-core'
+                      port:
+                        number: 80
+                - path: '{{ harbor_path }}chartrepo'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ harbor_name }}-core'
+                      port:
+                        number: 80
+                - path: '{{ harbor_path }}c'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ harbor_name }}-core'
+                      port:
+                        number: 80
         # Don't change the ingressClassName
         ingressClassName: nginx
