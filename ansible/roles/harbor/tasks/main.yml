@@ -190,6 +190,8 @@
       metadata:
         name: 'ingress-{{ harbor_name }}'
         namespace: '{{ harbor_name }}'
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
       spec:
         rules:
           - host: '{{ harbor_domain }}'
@@ -237,5 +239,9 @@
                       name: '{{ harbor_name }}-core'
                       port:
                         number: 80
+        tls:
+          - hosts:
+              - '{{ harbor_domain }}'
+            secretName: '{{ harbor_name }}-cert'
         # Don't change the ingressClassName
         ingressClassName: nginx

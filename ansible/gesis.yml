@@ -16,6 +16,8 @@
   roles:
     - role: cni
     - role: cert-manager
+      vars:
+        cert_manager_email: methodshub@gesis.org
     - role: metallb
       vars:
         metallb_addresses_begin: '{{ K8S_INGRESS }}'

@@ -1,1 +1,2 @@
 cert_manager_version: v1.16.2
+cert_manager_email: to-overwrite@mail
