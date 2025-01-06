@@ -44,7 +44,7 @@
     - role: harbor
       vars:
         harbor_storage_class_name: local-storage
-        harbor_protocol: http
+        harbor_protocol: https
         harbor_domain: '{{ HARBOR_DOMAIN }}'
         harbor_path: '{{ HARBOR_PATH }}'
 - name: Prepare Kubernetes cluster for mybinder.org
