@@ -195,7 +195,7 @@
                   pathType: Prefix
                   backend:
                     service:
-                      name: '{{ harbor_name }}'
+                      name: '{{ harbor_name }}-portal'
                       port:
                         number: 80
         # Don't change the ingressClassName
