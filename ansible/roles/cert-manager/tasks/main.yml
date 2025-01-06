@@ -32,15 +32,12 @@
         name: letsencrypt
       spec:
         acme:
-          server: '{{ cert_manager_letsencrypt_production | ternary("https://acme-v02.api.letsencrypt.org/directory", "https://acme-staging-v02.api.letsencrypt.org/directory") }}'
+          server: '{{ cert_manager_production | ternary(cert_manager_letsencrypt_production, cert_manager_letsencrypt_stage) }}'
           email: '{{ cert_manager_email }}'
           privateKeySecretRef:
             name: letsencrypt
           solvers:
             - http01:
-              ingress:
-                class: internal-nginx
-                podTemplate:
-                  spec:
-                    nodeSelector:
-                      "kubernetes.io/os": linux
+                ingress:
+                  # Don't change the ingressClassName
+                  ingressClassName: nginx
