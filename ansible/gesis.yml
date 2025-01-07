@@ -18,7 +18,7 @@
     - role: cert-manager
       vars:
         cert_manager_email: methodshub@gesis.org
-        cert_manager_production: false
+        cert_manager_production: true
     - role: metallb
       vars:
         metallb_addresses_begin: '{{ K8S_INGRESS }}'
