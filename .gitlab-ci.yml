@@ -4,6 +4,7 @@ variables:
 
 stages:
   - lint
+  - build
   - deploy-acceptance-ansible
   - test-acceptance
   - deploy-production-nginx
@@ -46,3 +47,13 @@ smoke test to acceptance cluster:
     INTERACTIVE_URL: https://notebooks-test.gesis.org/binder/
   extends:
     - .smoke test
+
+pages:
+  stage: .post
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+  script:
+    - echo Publish documentation to GitLab Pages
+  artifacts:
+    paths:
+      - public
