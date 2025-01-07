@@ -4,11 +4,22 @@ variables:
 
 stages:
   - lint
+  - build
   - deploy-acceptance-ansible
   - test-acceptance
   - deploy-production-nginx
 
 include:
+  - component: $CI_SERVER_FQDN/rse/docker/images/sphinx-doc/sphinx-doc@2.3.1
+    inputs:
+      stage: build
+      dir: docs
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+        changes:
+          - docs/source/**/*
+
   - component: $CI_SERVER_FQDN/rse/docker/images/ansible/ansible-lint@10.2.6
     inputs:
       stage: lint
@@ -36,3 +47,13 @@ smoke test to acceptance cluster:
     INTERACTIVE_URL: https://notebooks-test.gesis.org/binder/
   extends:
     - .smoke test
+
+pages:
+  stage: .post
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+  script:
+    - echo Publish documentation to GitLab Pages
+  artifacts:
+    paths:
+      - public
