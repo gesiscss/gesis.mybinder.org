@@ -26,3 +26,11 @@
     - redis
     - trivy
     - database
+
+- name: Create persistent directories for Redis in /harbor/ if it does not exist
+  ansible.builtin.file:
+    path: "/harbor/redis"
+    state: directory
+    owner: 999
+    group: 999
+    mode: u=rwx,g=rx,o=rx
