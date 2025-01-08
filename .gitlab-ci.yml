@@ -33,6 +33,7 @@ include:
   - component: $CI_SERVER_FQDN/rse/docker/images/ansible/ansible-deploy@11.1.0
     inputs:
       stage: deploy-acceptance-ansible
+      environment: acceptance
       dir: ansible
       inventory: gesis-acceptance
       playbook: gesis.yml
