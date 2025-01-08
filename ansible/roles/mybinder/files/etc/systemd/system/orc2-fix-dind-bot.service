@@ -9,6 +9,8 @@ Restart=always
 RestartSec=1
 User=ansible
 {% for host in hostvars %}
+{% if host != 'localhost' %}
 Environment="PASSWORD_{{ hostvars[host]['ansible_host'] | replace(".", "_") }}={{ hostvars[host]['ansible_become_pass'] }}"
+{% endif %}
 {% endfor %}
 ExecStart=/usr/bin/python3 /usr/bin/orc2-fix-dind-bot.py --verbose
