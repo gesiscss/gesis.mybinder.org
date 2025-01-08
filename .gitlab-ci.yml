@@ -24,6 +24,11 @@ include:
     inputs:
       stage: lint
       dir: ansible
+    rules:
+      - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+      - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_PIPELINE_SOURCE == "merge_request_event"
+        changes:
+          - ansible/**/*
 
   - component: $CI_SERVER_FQDN/rse/docker/images/ansible/ansible-deploy@11.1.0
     inputs:
