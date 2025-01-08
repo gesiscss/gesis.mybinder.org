@@ -9,6 +9,12 @@ stages:
   - test-acceptance
   - deploy-production-nginx
 
+show variables:
+  stage: .pre
+  script:
+    - echo $CI_SERVER_FQDN
+    - echo $CI_PIPELINE_SOURCE
+
 include:
   - component: $CI_SERVER_FQDN/rse/docker/images/sphinx-doc/sphinx-doc@2.3.1
     inputs:
