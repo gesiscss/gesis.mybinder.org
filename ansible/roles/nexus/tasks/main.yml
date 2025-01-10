@@ -68,6 +68,9 @@
     create_namespace: true
     history_max: 3
     values:
+      image:
+        # See https://hub.docker.com/r/sonatype/nexus3/tags
+        tag: '{{ nexus_version }}'
       ingress:
         enabled: true
         annotations:

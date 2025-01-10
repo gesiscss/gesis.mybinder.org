@@ -1,5 +1,5 @@
 nexus_state: present
-nexus_version: 5.5.1
+nexus_version: 3.76.0-java17-alpine
 nexus_name: nexus
 nexus_namespace: nexus
 nexus_storage_class_name: standard
