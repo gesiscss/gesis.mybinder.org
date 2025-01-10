@@ -18,6 +18,7 @@
       kind: Secret
       metadata:
         name: '{{ nexus_name }}-root-password'
+        namespace: "{{ nexus_namespace }}"
       data:
         password: '{{ nexus_root_password }}'
 
