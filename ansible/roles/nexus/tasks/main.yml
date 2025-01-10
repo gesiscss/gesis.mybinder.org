@@ -70,7 +70,8 @@
     values:
       ingress:
         enabled: true
-        host: '{{ nexus_domain }}'
+        hosts:
+          - '{{ nexus_domain }}'
         ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
