@@ -10,6 +10,13 @@
     name: stevehipwell
     repo_url: https://stevehipwell.github.io/helm-charts/
 
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: "{{ nexus_namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: '{{ nexus_state }}'
+
 - name: Create a secret for nexus root password
   kubernetes.core.k8s:
     state: present
