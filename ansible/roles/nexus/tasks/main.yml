@@ -70,11 +70,16 @@
     values:
       ingress:
         enabled: true
-        hosts:
-          - '{{ nexus_domain }}'
-        ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - '{{ nexus_domain }}'
+        tls:
+          - hosts:
+              - '{{ nexus_domain }}'
+            secretName: '{{ nexus_name_tls_secret }}'
+        # Don't change the ingressClassName
+        ingressClassName: nginx
       persistence:
         enabled: true
         storageClass: "{{ nexus_storage_class_name }}-registry"
