@@ -21,6 +21,8 @@ JUPYTERHUB_CAPACITY_STORAGE=2Gi
 PROMETHEUS_CAPACITY_STORAGE=15Gi
 HARBOR_DOMAIN=notebooks-test.gesis.org
 HARBOR_PATH='/'
+NEXUS_DOMAIN=notebooks-test.gesis.org
+NEXUS_PATH='/'
 
 [kubernetes_workers]
 svko-css-backup-node
@@ -31,6 +33,9 @@ svko-k8s-test03
 svko-css-backup-node
 
 [harbor]
+svko-k8s-test03
+
+[nexus]
 svko-k8s-test03
 
 [binderhub]

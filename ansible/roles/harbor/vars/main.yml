@@ -1,3 +1,4 @@
+harbor_state: present
 harbor_version: 1.16.0
 harbor_name: harbor
 harbor_namespace: harbor
@@ -11,3 +12,5 @@ harbor_protocol: http
 harbor_domain: harbor.localhost
 harbor_path: '/'
 harbor_name_tls_secret: letsencrypt
+# Remember to change the root password!
+harbor_root_password: 123456
