@@ -19,7 +19,7 @@
 
 - name: Create a secret for nexus root password
   kubernetes.core.k8s:
-    state: present
+    state: '{{ nexus_state }}'
     definition:
       apiVersion: v1
       kind: Secret
@@ -31,7 +31,7 @@
 
 - name: Create a storage for nexus
   kubernetes.core.k8s:
-    state: present
+    state: '{{ nexus_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
