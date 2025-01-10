@@ -2,7 +2,7 @@
 # https://artifacthub.io/packages/helm/sonatype/nxrm-ha,
 # for their resiliency and high-availability deployment
 # but this Helm Chart requires a Nexus Repository Pro license,
-# 
+#
 # Most people looking into Nexus Repository OSS are using
 # https://github.com/stevehipwell/helm-charts.
 - name: Add nexus's repository
