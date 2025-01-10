@@ -10,20 +10,28 @@
     name: stevehipwell
     repo_url: https://stevehipwell.github.io/helm-charts/
 
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: "{{ nexus_namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: '{{ nexus_state }}'
+
 - name: Create a secret for nexus root password
   kubernetes.core.k8s:
-    state: present
+    state: '{{ nexus_state }}'
     definition:
       apiVersion: v1
       kind: Secret
       metadata:
         name: '{{ nexus_name }}-root-password'
+        namespace: "{{ nexus_namespace }}"
       data:
         password: '{{ nexus_root_password }}'
 
 - name: Create a storage for nexus
   kubernetes.core.k8s:
-    state: present
+    state: '{{ nexus_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
@@ -62,7 +70,8 @@
     values:
       ingress:
         enabled: true
-        host: '{{ nexus_domain }}'
+        hosts:
+          - '{{ nexus_domain }}'
         ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt

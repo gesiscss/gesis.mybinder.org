@@ -5,7 +5,7 @@
 
 - name: Create a storage for jobservice
   kubernetes.core.k8s:
-    state: present
+    state: '{{ harbor_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
@@ -34,7 +34,7 @@
 
 - name: Create a storage for registry
   kubernetes.core.k8s:
-    state: present
+    state: '{{ harbor_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
@@ -63,7 +63,7 @@
 
 - name: Create a storage for redis
   kubernetes.core.k8s:
-    state: present
+    state: '{{ harbor_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
@@ -92,7 +92,7 @@
 
 - name: Create a storage for trivy
   kubernetes.core.k8s:
-    state: present
+    state: '{{ harbor_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
@@ -121,7 +121,7 @@
 
 - name: Create a storage for database
   kubernetes.core.k8s:
-    state: present
+    state: '{{ harbor_state }}'
     definition:
       apiVersion: v1
       kind: PersistentVolume
