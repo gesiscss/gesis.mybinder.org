@@ -1,0 +1,71 @@
+# Sonartype publishes a Helm Chart,
+# https://artifacthub.io/packages/helm/sonatype/nxrm-ha,
+# for their resiliency and high-availability deployment
+# but this Helm Chart requires a Nexus Repository Pro license,
+# 
+# Most people looking into Nexus Repository OSS are using
+# https://github.com/stevehipwell/helm-charts.
+- name: Add nexus's repository
+  kubernetes.core.helm_repository:
+    name: stevehipwell
+    repo_url: https://stevehipwell.github.io/helm-charts/
+
+- name: Create a secret for nexus root password
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: '{{ nexus_name }}-root-password'
+      data:
+        password: '{{ nexus_root_password }}'
+
+- name: Create a storage for nexus
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: "{{ nexus_name }}-registry"
+        labels:
+          nexus: registry
+      spec:
+        capacity:
+          storage: "{{ nexus_registry_storage }}"
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Delete
+        storageClassName: "{{ nexus_storage_class_name }}-registry"
+        local:
+          path: /nexus/registry
+        nodeAffinity:
+          required:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: nexus
+                    operator: In
+                    values:
+                      - 'true'
+
+- name: Deploy nexus
+  kubernetes.core.helm:
+    release_state: '{{ nexus_state }}'
+    chart_ref: stevehipwell/nexus3
+    chart_version: "{{ nexus_version }}"
+    release_name: "{{ nexus_name }}"
+    release_namespace: "{{ nexus_namespace }}"
+    create_namespace: true
+    history_max: 3
+    values:
+      ingress:
+        enabled: true
+        host: '{{ nexus_domain }}'
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+      persistence:
+        enabled: true
+        storageClass: "{{ nexus_storage_class_name }}-registry"

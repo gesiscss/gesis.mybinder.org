@@ -1,0 +1,12 @@
+nexus_state: present
+nexus_version: 5.5.1
+nexus_name: nexus
+nexus_namespace: nexus
+nexus_storage_class_name: standard
+nexus_registry_storage: 10Gi
+nexus_protocol: http
+nexus_domain: nexus.localhost
+nexus_path: '/'
+nexus_name_tls_secret: letsencrypt
+# Remember to change the root password!
+nexus_root_password: 123456

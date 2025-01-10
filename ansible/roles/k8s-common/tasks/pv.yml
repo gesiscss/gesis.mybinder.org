@@ -23,7 +23,6 @@
   loop:
     - jobservice
     - registry
-    - redis
     - trivy
     - database
 
@@ -34,3 +33,13 @@
     owner: 999
     group: 999
     mode: u=rwx,g=rx,o=rx
+
+- name: Create persistent directories in /nexus/ if it does not exist
+  ansible.builtin.file:
+    path: "/nexus/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  loop:
+    - registry

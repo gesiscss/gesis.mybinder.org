@@ -37,16 +37,26 @@
     - role: gitlab
       vars:
         gitlab_k8s_token: '{{ GITLAB_K8S_TOKEN }}'
-- name: Configure Harbor on Kubernetes cluster
+- name: Configure Conainer Registry on Kubernetes cluster
   hosts: kubernetes_control_panel
   gather_facts: false
   roles:
     - role: harbor
       vars:
+        harbor_state: absent
         harbor_storage_class_name: local-storage
         harbor_protocol: https
         harbor_domain: '{{ HARBOR_DOMAIN }}'
         harbor_path: '{{ HARBOR_PATH }}'
+        harbor_root_password: '{{ HARBOR_ADMIN_PASSWORD }}'
+    - role: nexus
+      vars:
+        nexus_state: present
+        nexus_storage_class_name: local-storage
+        nexus_protocol: https
+        nexus_domain: '{{ NEXUS_DOMAIN }}'
+        nexus_path: '{{ NEXUS_PATH }}'
+        nexus_root_password: '{{ NEXUS_ADMIN_PASSWORD }}'
 - name: Prepare Kubernetes cluster for mybinder.org
   hosts: kubernetes_control_panel
   gather_facts: false
