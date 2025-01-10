@@ -8,6 +8,10 @@ Inventories
 
 The `inventories <https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html>`_ are located at `ansible/inventories/ <https://git.gesis.org/methods-hub/binder.methodshub.gesis.org/-/tree/main/ansible/inventories?ref_type=heads>`_.
 
+..  note::
+
+    The inventory is a good place to store global values. Read more at `Adding variables to inventory <https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#adding-variables-to-inventory>`_.
+
 Secrets
 -------
 
