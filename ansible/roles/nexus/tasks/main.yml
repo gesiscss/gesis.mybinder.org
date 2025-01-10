@@ -7,8 +7,8 @@
 # https://github.com/stevehipwell/helm-charts.
 - name: Add nexus's repository
   kubernetes.core.helm_repository:
-    name: stevehipwell
-    repo_url: https://stevehipwell.github.io/helm-charts/
+    name: '{{ nexus_helm_repo }}'
+    repo_url: '{{ nexus_helm_repo_url }}'
 
 - name: Create a k8s namespace
   kubernetes.core.k8s:
@@ -61,13 +61,16 @@
 - name: Deploy nexus
   kubernetes.core.helm:
     release_state: '{{ nexus_state }}'
-    chart_ref: stevehipwell/nexus3
-    chart_version: "{{ nexus_version }}"
+    chart_ref: '{{ nexus_helm_repo }}/{{ nexus_name }}'
+    chart_version: "{{ nexus_chart_version }}"
     release_name: "{{ nexus_name }}"
     release_namespace: "{{ nexus_namespace }}"
     create_namespace: true
     history_max: 3
     values:
+      image:
+        # See https://hub.docker.com/r/sonatype/nexus3/tags
+        tag: '{{ nexus_version }}'
       ingress:
         enabled: true
         annotations:
