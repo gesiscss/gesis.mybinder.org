@@ -86,3 +86,17 @@
       persistence:
         enabled: true
         storageClass: "{{ nexus_storage_class_name }}-registry"
+      service:
+        # From https://help.sonatype.com/en/docker-registry.html
+        #
+        # > The Docker client does not accept the application context path or base registry path
+        # > as Docker needs the registry exposed at the root of the host + port that it is accessing.
+        #
+        # > Nexus Repository manages this Docker limitation [...] Using port connectors
+        # > (limit to only 20 connectors/repositories)
+        additionalPorts:
+          - port: 8082
+            name: docker-group
+            containerPort: 8082
+            hosts:
+              - '{{ nexus_domain }}'
