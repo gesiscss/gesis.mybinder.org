@@ -19,9 +19,9 @@ svko-k8s-test01
 GRAFANA_CAPACITY_STORAGE=2Gi
 JUPYTERHUB_CAPACITY_STORAGE=2Gi
 PROMETHEUS_CAPACITY_STORAGE=15Gi
-HARBOR_DOMAIN=notebooks-test.gesis.org
+HARBOR_DOMAIN=harbor.notebooks-test.gesis.org
 HARBOR_PATH='/'
-NEXUS_DOMAIN=notebooks-test.gesis.org
+NEXUS_DOMAIN=nexus.notebooks-test.gesis.org
 NEXUS_PATH='/'
 
 [kubernetes_workers]
