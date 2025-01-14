@@ -43,7 +43,7 @@
   roles:
     - role: harbor
       vars:
-        harbor_state: absent
+        harbor_state: '{{ HARBOR_STATE }}'
         harbor_storage_class_name: local-storage
         harbor_protocol: https
         harbor_domain: '{{ HARBOR_DOMAIN }}'
@@ -51,7 +51,7 @@
         harbor_root_password: '{{ HARBOR_ADMIN_PASSWORD }}'
     - role: nexus
       vars:
-        nexus_state: present
+        nexus_state: '{{ NEXUS_STATE }}'
         nexus_storage_class_name: local-storage
         nexus_protocol: https
         nexus_domain: '{{ NEXUS_DOMAIN }}'
