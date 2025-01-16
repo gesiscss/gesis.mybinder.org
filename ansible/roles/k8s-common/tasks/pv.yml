@@ -19,12 +19,19 @@
     state: directory
     owner: root
     group: root
-    mode: u=rwx,g=rx,o=rx
+    mode: u=rwx,g=rwx,o=rx
   loop:
     - jobservice
-    - registry
     - trivy
     - database
+
+- name: Create persistent directories for Registry in /harbor/ if it does not exist
+  ansible.builtin.file:
+    path: "/harbor/registry"
+    state: directory
+    owner: 10000
+    group: 10000
+    mode: u=rwx,g=rx,o=rx
 
 - name: Create persistent directories for Redis in /harbor/ if it does not exist
   ansible.builtin.file:
