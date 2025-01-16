@@ -76,10 +76,10 @@
       persistence:
         enabled: true
         storageClass: "{{ nexus_storage_class_name }}-registry"
-      properties:
-        # The application context path is the directory found after the domain name in the sites URL.
-        # https://help.sonatype.com/en/configuring-the-runtime-environment.html#application-context-path
-        - 'nexus-context-path={{ nexus_path }}'
+      env:
+        # From https://hub.docker.com/r/sonatype/nexus3
+        - name: NEXUS_CONTEXT
+          value: '{{ nexus_path[1:] }}'
       startupProbe:
         httpGet:
           path: '{{ nexus_path }}'
