@@ -56,6 +56,8 @@
         nexus_protocol: https
         nexus_domain: '{{ NEXUS_DOMAIN }}'
         nexus_path: '{{ NEXUS_PATH }}'
+        nexus_registry_domain: '{{ NEXUS_REGISTRY_DOMAIN }}'
+        nexus_registry_path: '{{ NEXUS_REGISTRY_PATH }}'
         nexus_root_password: '{{ NEXUS_ADMIN_PASSWORD }}'
 - name: Prepare Kubernetes cluster for mybinder.org
   hosts: kubernetes_control_panel

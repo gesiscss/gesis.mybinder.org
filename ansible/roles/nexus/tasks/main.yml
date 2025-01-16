@@ -72,20 +72,14 @@
         # See https://hub.docker.com/r/sonatype/nexus3/tags
         tag: '{{ nexus_version }}'
       ingress:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-        hosts:
-          - '{{ nexus_domain }}'
-        tls:
-          - hosts:
-              - '{{ nexus_domain }}'
-            secretName: '{{ nexus_name_tls_secret }}'
-        # Don't change the ingressClassName
-        ingressClassName: nginx
+        enabled: false
       persistence:
         enabled: true
         storageClass: "{{ nexus_storage_class_name }}-registry"
+      properties:
+        # The application context path is the directory found after the domain name in the sites URL.
+        # https://help.sonatype.com/en/configuring-the-runtime-environment.html#application-context-path
+        - 'nexus-context-path={{ nexus_path }}'
       service:
         # From https://help.sonatype.com/en/docker-registry.html
         #
@@ -100,3 +94,44 @@
             containerPort: 8082
             hosts:
               - '{{ nexus_domain }}'
+
+- name: Create a ingress for nexus
+  kubernetes.core.k8s:
+    state: '{{ nexus_state }}'
+    definition:
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: '{{ nexus_name }}-ingress'
+        namespace: '{{ nexus_namespace }}'
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+      spec:
+        # Don't change the ingressClassName
+        ingressClassName: nginx
+        tls:
+          - hosts:
+              - '{{ nexus_domain }}'
+              - '{{ nexus_registry_domain }}'
+            secretName: '{{ nexus_name_tls_secret }}'
+        rules:
+          - host: '{{ nexus_domain }}'
+            http:
+              paths:
+                - path: '{{ nexus_path }}'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ nexus_name }}'
+                      port:
+                        name: http
+          - host: '{{ nexus_registry_domain }}'
+            http:
+              paths:
+                - path: '{{ nexus_registry_path }}'
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: '{{ nexus_name }}'
+                      port:
+                        name: docker-group

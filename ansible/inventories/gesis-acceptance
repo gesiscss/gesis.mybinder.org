@@ -23,8 +23,10 @@ HARBOR_STATE=present
 HARBOR_DOMAIN=harbor.notebooks-test.gesis.org
 HARBOR_PATH='/'
 NEXUS_STATE=present
-NEXUS_DOMAIN=nexus.notebooks-test.gesis.org
-NEXUS_PATH='/'
+NEXUS_DOMAIN=notebooks-test.gesis.org
+NEXUS_PATH='/nexus'
+NEXUS_REGISTRY_DOMAIN=nexus.notebooks-test.gesis.org
+NEXUS_REGISTRY_PATH='/'
 
 [kubernetes_workers]
 svko-css-backup-node
