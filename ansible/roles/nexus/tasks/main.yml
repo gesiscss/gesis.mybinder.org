@@ -80,6 +80,15 @@
         # The application context path is the directory found after the domain name in the sites URL.
         # https://help.sonatype.com/en/configuring-the-runtime-environment.html#application-context-path
         - 'nexus-context-path={{ nexus_path }}'
+      startupProbe:
+        httpGet:
+          path: '{{ nexus_path }}'
+      livenessProbe:
+        httpGet:
+          path: '{{ nexus_path }}'
+      readinessProbe:
+        httpGet:
+          path: '{{ nexus_path }}/service/rest/v1/status'
       service:
         # From https://help.sonatype.com/en/docker-registry.html
         #
