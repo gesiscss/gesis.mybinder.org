@@ -161,12 +161,19 @@
       externalURL: '{{ harbor_protocol }}://{{ harbor_domain }}'
       harborAdminPassword: "{{ harbor_root_password }}"
       expose:
-        type: ClusterIP
+        type: ingress
         tls:
-          enabled: false
+          enabled: true
+          certSource: secret
+          secret:
+            secretName: '{{ harbor_name_tls_secret }}'
         ingress:
           hosts:
             core: '{{ harbor_domain }}'
+          # Don't change the className
+          className: nginx
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
       persistence:
         persistentVolumeClaim:
           registry:
@@ -180,69 +187,3 @@
             storageClass: "{{ harbor_storage_class_name }}-redis"
           trivy:
             storageClass: "{{ harbor_storage_class_name }}-trivy"
-
-# Based on https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
-- name: Create a ingress resources
-  kubernetes.core.k8s:
-    state: '{{ harbor_state }}'
-    definition:
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: 'ingress-{{ harbor_name }}'
-        namespace: '{{ harbor_name }}'
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-      spec:
-        rules:
-          - host: '{{ harbor_domain }}'
-            http:
-              paths:
-                - path: '{{ harbor_path }}'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-portal'
-                      port:
-                        number: 80
-                - path: '{{ harbor_path }}api'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-core'
-                      port:
-                        number: 80
-                - path: '{{ harbor_path }}service'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-core'
-                      port:
-                        number: 80
-                - path: '{{ harbor_path }}v2'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-core'
-                      port:
-                        number: 80
-                - path: '{{ harbor_path }}chartrepo'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-core'
-                      port:
-                        number: 80
-                - path: '{{ harbor_path }}c'
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: '{{ harbor_name }}-core'
-                      port:
-                        number: 80
-        tls:
-          - hosts:
-              - '{{ harbor_domain }}'
-            secretName: '{{ harbor_name_tls_secret }}'
-        # Don't change the ingressClassName
-        ingressClassName: nginx
