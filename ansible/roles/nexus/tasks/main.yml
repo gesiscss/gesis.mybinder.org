@@ -102,7 +102,7 @@
             name: docker-group
             containerPort: 8082
             hosts:
-              - '{{ nexus_domain }}'
+              - '{{ nexus_registry_domain }}'
 
 - name: Create a ingress for nexus
   kubernetes.core.k8s:
