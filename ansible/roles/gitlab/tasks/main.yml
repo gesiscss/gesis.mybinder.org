@@ -19,6 +19,8 @@
     chart_version: '{{ gitlab_version }}'
     create_namespace: false
     values:
+      image:
+        tag: '{{ gitlab_tag }}'
       config:
         token: '{{ gitlab_k8s_token }}'
         kasAddress: wss://git.gesis.org/-/kubernetes-agent/
