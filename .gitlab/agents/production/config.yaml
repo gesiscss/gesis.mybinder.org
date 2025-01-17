@@ -1,0 +1,6 @@
+# Authorize the agent to access projects in your groups
+# https://git.gesis.org/help/user/clusters/agent/ci_cd_workflow.md#authorize-the-agent-to-access-projects-in-your-groups
+ci_access:
+  projects:
+    - id: methods-hub/binder.methodshub.gesis.org
+    - id: methods-hub/interactive-environment
