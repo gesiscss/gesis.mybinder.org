@@ -10,6 +10,12 @@
   become: true
   roles:
     - role: k8s-control-panel
+- name: Configure Kubernetes workers
+  hosts: kubernetes_workers
+  gather_facts: false
+  become: true
+  roles:
+    - k8s-worker
 - name: Configure Kubernetes Cluster Network
   hosts: kubernetes_control_panel
   gather_facts: false
@@ -24,12 +30,6 @@
         metallb_addresses_begin: '{{ K8S_INGRESS }}'
         metallb_addresses_end: '{{ K8S_INGRESS }}'
     - ingress
-- name: Configure Kubernetes workers
-  hosts: kubernetes_workers
-  gather_facts: false
-  become: true
-  roles:
-    - k8s-worker
 - name: Configure External Access to Kubernetes Cluster
   hosts: kubernetes_control_panel
   gather_facts: false
