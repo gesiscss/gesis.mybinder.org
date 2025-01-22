@@ -1,0 +1,5 @@
+interactive_environment_state: present
+interactive_environment_namespace: interactive-environment
+interactive_environment_tls_secret: letsencrypt
+interactive_environment_domain: mybinder.localhost
+interactive_environment_subpath: binder

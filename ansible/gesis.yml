@@ -79,4 +79,6 @@
         jupyterhub_capacity_storage: '{{ JUPYTERHUB_CAPACITY_STORAGE }}'
         jupyterhub_storage_class: local-storage-jupyterhub
         jupyterhub_storage_local_path: /orc2_data/jupyterhub
-    - mybinder
+    - role: interactive-environment
+      vars:
+        interactive_environment_domain: '{{ INTERACTIVE_ENVIRONMENT_DOMAIN }}'
