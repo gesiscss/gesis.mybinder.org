@@ -21,15 +21,16 @@
   gather_facts: false
   roles:
     - role: cni
-    - role: cert-manager
-      vars:
-        cert_manager_email: methodshub@gesis.org
-        cert_manager_production: true
     - role: metallb
       vars:
         metallb_addresses_begin: '{{ K8S_INGRESS }}'
         metallb_addresses_end: '{{ K8S_INGRESS }}'
     - ingress
+    # The cert-manager only works after the ingress.
+    - role: cert-manager
+      vars:
+        cert_manager_email: methodshub@gesis.org
+        cert_manager_production: '{{ CERT_MANAGER_PRODUCTION }}'
 - name: Configure External Access to Kubernetes Cluster
   hosts: kubernetes_control_panel
   gather_facts: false

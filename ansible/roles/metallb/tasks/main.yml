@@ -25,6 +25,8 @@
     chart_version: '{{ metallb_version }}'
     create_namespace: false
     history_max: 3
+    # We must wait for pods before create the IP Address Pool
+    wait: true
 - name: Create MetalLB Kubernetes IP Address Pool
   kubernetes.core.k8s:
     state: present
