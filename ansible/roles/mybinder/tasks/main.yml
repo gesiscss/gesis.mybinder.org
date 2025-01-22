@@ -38,3 +38,33 @@
 - name: Configure kill-after-timeout-pods
   ansible.builtin.import_tasks:
     file: kill-after-timeout-pods.yml
+# It is preferable to run each service in their own subdomain
+# but GESIS "limits" the available subdomains.
+# Instead of using different subdomains,
+# we use subpath and we a redirect from the root path (/).
+- name: Create Redirect for BinderHub
+  kubernetes.core.k8s:
+    state: '{{ mybinder_state }}'
+    definition:
+      # Based on https://serverfault.com/a/1101342
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        # Don't change the annotations
+        annotations:
+          nginx.ingress.kubernetes.io/server-snippet: |
+            return 301 $scheme://{{ mybinder_domain }}/{{ mybinder_subpath }};
+        name: ingress-redirect
+      spec:
+        # Don't change the className
+        ingressClassName: nginx
+        tls:
+          - hosts:
+              - '{{ mybinder_domain }}'
+            secretName: '{{ mybinder_name_tls_secret }}'
+        rules:
+          - host: '{{ mybinder_domain }}'
+            http:
+              paths:
+                - path: '/'
+                  pathType: Exact
