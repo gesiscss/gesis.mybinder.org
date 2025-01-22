@@ -54,7 +54,7 @@
         namespace: '{{ interactive_environment_namespace }}'
         # Don't change the annotations
         annotations:
-          nginx.ingress.kubernetes.io/permanent-redirect: 'https://{{ interactive_environment_domain }}/{{ interactive_environment_subpath }}'
+          nginx.ingress.kubernetes.io/app-root: /binder/
       spec:
         # Don't change the className
         ingressClassName: nginx
@@ -72,6 +72,6 @@
                   # but the service does NOT need to exist.
                   backend:
                     service:
-                      name: ghost
+                      name: binder
                       port:
                         number: 80
