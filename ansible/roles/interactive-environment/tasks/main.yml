@@ -44,26 +44,27 @@
 # we use subpath and we a redirect from the root path (/).
 - name: Create Redirect for BinderHub
   kubernetes.core.k8s:
-    state: '{{ mybinder_state }}'
+    state: '{{ interactive_environment_state }}'
     definition:
       # Based on https://serverfault.com/a/1101342
       apiVersion: networking.k8s.io/v1
       kind: Ingress
       metadata:
+        name: '{{ interactive_environment_namespace }}-ingress-redirect'
+        namespace: '{{ interactive_environment_namespace }}'
         # Don't change the annotations
         annotations:
           nginx.ingress.kubernetes.io/server-snippet: |
-            return 301 $scheme://{{ mybinder_domain }}/{{ mybinder_subpath }};
-        name: ingress-redirect
+            return 301 $scheme://{{ interactive_environment_domain }}/{{ interactive_environment_subpath }};
       spec:
         # Don't change the className
         ingressClassName: nginx
         tls:
           - hosts:
-              - '{{ mybinder_domain }}'
-            secretName: '{{ mybinder_name_tls_secret }}'
+              - '{{ interactive_environment_domain }}'
+            secretName: '{{ interactive_environment_tls_secret }}'
         rules:
-          - host: '{{ mybinder_domain }}'
+          - host: '{{ interactive_environment_domain }}'
             http:
               paths:
                 - path: '/'

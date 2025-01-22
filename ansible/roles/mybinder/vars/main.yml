@@ -1,4 +1,0 @@
-mybinder_state: present
-mybinder_name_tls_secret: letsencrypt
-mybinder_domain: mybinder.localhost
-mybinder_subpath: binder

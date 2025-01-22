@@ -28,7 +28,7 @@ NEXUS_DOMAIN=notebooks-test.gesis.org
 NEXUS_PATH='/nexus'
 NEXUS_REGISTRY_DOMAIN=nexus.notebooks-test.gesis.org
 NEXUS_REGISTRY_PATH='/'
-MYBINDER_DOMAIN=notebooks-test.gesis.org
+INTERACTIVE_ENVIRONMENT_DOMAIN=notebooks-test.gesis.org
 
 [kubernetes_workers]
 svko-css-backup-node
