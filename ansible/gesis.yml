@@ -65,17 +65,17 @@
   roles:
     - role: prometheus
       vars:
-        prometheus_capacity_storage: 1Gi
-        prometheus_storage_class: local-storage
+        prometheus_capacity_storage: '{{ PROMETHEUS_CAPACITY_STORAGE }}'
+        prometheus_storage_class: local-storage-prometheus
         prometheus_storage_local_path: /orc2_data/prometheus
     - role: grafana
       vars:
-        grafana_capacity_storage: 1Gi
-        grafana_storage_class: local-storage
+        grafana_capacity_storage: '{{ GRAFANA_CAPACITY_STORAGE }}'
+        grafana_storage_class: local-storage-grafana
         grafana_storage_local_path: /orc2_data/grafana
     - role: jupyterhub
       vars:
-        jupyterhub_capacity_storage: 1Gi
-        jupyterhub_storage_class: local-storage
+        jupyterhub_capacity_storage: '{{ JUPYTERHUB_CAPACITY_STORAGE }}'
+        jupyterhub_storage_class: local-storage-jupyterhub
         jupyterhub_storage_local_path: /orc2_data/jupyterhub
     - mybinder
