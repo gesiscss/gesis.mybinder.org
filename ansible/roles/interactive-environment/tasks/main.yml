@@ -54,8 +54,7 @@
         namespace: '{{ interactive_environment_namespace }}'
         # Don't change the annotations
         annotations:
-          nginx.ingress.kubernetes.io/server-snippet: |
-            return 301 $scheme://{{ interactive_environment_domain }}/{{ interactive_environment_subpath }};
+          nginx.ingress.kubernetes.io/permanent-redirect: 'https://{{ interactive_environment_domain }}/{{ interactive_environment_subpath }}'
       spec:
         # Don't change the className
         ingressClassName: nginx
@@ -69,3 +68,10 @@
               paths:
                 - path: '/'
                   pathType: Exact
+                  # The backend must be declared
+                  # but the service does NOT need to exist.
+                  backend:
+                    service:
+                      name: ghost
+                      port:
+                        number: 80
