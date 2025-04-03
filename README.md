@@ -1,3 +1,3 @@
-# jupyterhub.methodshub.gesis.org
+# gesis.mybinder.org
 
-This is the configuration to deploy the Kubernetes cluster for Methods Hub Interactive Environment.
+This is the configuration of the lightweight Kubernetes [K3s](https://k3s.io/) used for Methods Hub Interactive Environment.
