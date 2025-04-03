@@ -12,9 +12,7 @@ workflow:
 stages:
   - lint
   - build
-  - deploy-acceptance-ansible
-  - test-acceptance
-  - deploy-production-nginx
+  - deploy-production
 
 include:
   - component: $CI_SERVER_FQDN/rse/docker/images/sphinx-doc/sphinx-doc@2.3.1
@@ -39,35 +37,15 @@ include:
 
   - component: $CI_SERVER_FQDN/rse/docker/images/ansible/ansible-deploy@11.1.0
     inputs:
-      stage: deploy-acceptance-ansible
-      environment: acceptance
+      stage: production
+      environment: production
       dir: ansible
-      inventory: gesis-acceptance
-      playbook: gesis.yml
+      inventory: gesis.mybinder.org
+      playbook: gesis.mybinder.org.yml
       ssh-user: ansible
       ssh-key-type: ed25519
     rules:
       - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_PIPELINE_SOURCE == "merge_request_event"
-        changes:
-          - ansible/**/*
-
-.smoke test:
-  stage: test-acceptance
-  variables:
-    INTERACTIVE_URL: url
-  script:
-    - curl $INTERACTIVE_URL
-
-smoke test to acceptance cluster:
-  stage: test-acceptance
-  rules:
-    - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_SERVER_FQDN == "git.gesis.org" && $CI_PIPELINE_SOURCE == "merge_request_event"
-  variables:
-    INTERACTIVE_URL: https://notebooks-test.gesis.org/binder/
-  extends:
-    - .smoke test
 
 pages:
   stage: .post
