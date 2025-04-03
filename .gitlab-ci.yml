@@ -37,7 +37,7 @@ include:
 
   - component: $CI_SERVER_FQDN/rse/docker/images/ansible/ansible-deploy@11.1.0
     inputs:
-      stage: production
+      stage: deploy-production
       environment: production
       dir: ansible
       inventory: gesis.mybinder.org
