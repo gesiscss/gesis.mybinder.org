@@ -1,3 +1,0 @@
-jupyterhub_capacity_storage: 1Gi
-jupyterhub_storage_class: default
-jupyterhub_storage_local_path: '/'
