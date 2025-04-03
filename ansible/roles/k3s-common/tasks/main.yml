@@ -14,6 +14,14 @@
     update_cache: true
     pkg:
       - curl
+- name: Populate service facts
+  ansible.builtin.service_facts:
 - name: Install K3s
+  when: ('k3s' not in ansible_facts.services)
   ansible.builtin.import_tasks:
     file: k3s.yml
+- name: Make sure K3s is running
+  ansible.builtin.systemd_service:
+    enabled: true
+    name: k3s
+    state: started
