@@ -1,0 +1,6 @@
+- name: Configure K3s
+  hosts: all
+  gather_facts: true
+  become: true
+  roles:
+    - k3s-common
