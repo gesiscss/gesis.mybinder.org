@@ -6,4 +6,6 @@
     group: '{{ ansible_facts.real_group_id }}'
     mode: u=rwx,g=rwx,o=rwx
 - name: Run K3s installation script
-  ansible.builtin.script: /tmp/k3s-installation.sh
+  ansible.builtin.command:
+    cmd: /tmp/k3s-installation.sh
+  changed_when: true
