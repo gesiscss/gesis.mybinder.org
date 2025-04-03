@@ -1,2 +1,0 @@
-cni_calico_version: "3.28.2"
-cni_cidr: "10.244.0.0/16"

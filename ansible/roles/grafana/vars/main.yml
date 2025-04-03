@@ -1,3 +1,0 @@
-grafana_capacity_storage: 1Gi
-grafana_storage_class: default
-grafana_storage_local_path: '/'

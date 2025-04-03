@@ -1,3 +1,0 @@
-prometheus_capacity_storage: 1Gi
-prometheus_storage_class: default
-prometheus_storage_local_path: '/'

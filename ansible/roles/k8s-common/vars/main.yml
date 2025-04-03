@@ -1,3 +1,0 @@
-k8s_common_containerd_version: "1.7.25"
-k8s_common_kubernetes_version: "1.32"
-k8s_common_helm_version: "3.16.1"
