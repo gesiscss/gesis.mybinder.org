@@ -15,7 +15,7 @@ Ansible inventory: https://git.gesis.org/methods-hub/gesis.mybinder.org/-/blob/m
 +-----------------------------------+------------------------------------------------------------+
 | Service                           | URL                                                        |
 +===================================+============================================================+
-| BinderHub                         | https://gesis.mybinder.org/                               |
+| BinderHub                         | https://gesis.mybinder.org/                                |
 +-----------------------------------+------------------------------------------------------------+
-| JupyterHub                        | https://jupyterhub.gesis.mybinder.org/                       |
+| JupyterHub                        | https://jupyterhub.gesis.mybinder.org/                     |
 +-----------------------------------+------------------------------------------------------------+

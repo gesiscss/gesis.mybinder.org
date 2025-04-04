@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Methods Hub's Kubernetes Cluster"
+project = "Methods Hub's Interactive Environment's Kubernetes Cluster"
 copyright = '2025, Methods Hub Team'
 author = '"Methods Hub Team'
 release = "YYYY.MM.DD"

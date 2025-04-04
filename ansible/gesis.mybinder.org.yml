@@ -3,4 +3,6 @@
   gather_facts: true
   become: true
   roles:
-    - k3s-common
+    - role: k3s
+      vars:
+        k3s_channel: '{{ K3S_CHANNEL }}'
