@@ -36,6 +36,7 @@ Methods Hub's `Interactive Environment`_ is based on `mybinder.org <https://mybi
    infrastructure-as-code
    environments
    kubernetes
+   openlens
    ansible
    gitlab
 
