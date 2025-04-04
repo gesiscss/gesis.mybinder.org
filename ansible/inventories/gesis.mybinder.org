@@ -1,2 +1,6 @@
 [all]
 gesis.mybinder.org ansible_host=78.46.233.119 ansible_ssh_user=ansible ansible_become_pass='{{ become_pass_78_46_233_119 }}'
+
+[all:vars]
+# List of K3s channels at https://update.k3s.io/v1-release/channels
+K3S_CHANNEL=v1.32
