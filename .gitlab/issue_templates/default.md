@@ -13,7 +13,6 @@
 
 /milestone %"25.01"
 
-/label ~"Environment::Acceptance"
 /label ~"Environment::Production"
 /label ~"Interactive Environment"
 /label ~"Interactive Environment::mybinder.org"
