@@ -7,10 +7,11 @@
     mode: u=rwx,g=rwx,o=rwx
 - name: Run K3s installation script
   ansible.builtin.command:
-    cmd: |
-      /tmp/k3s-installation.sh \
-      --disable=traefik \
-      --flannel-backend none
+    argv:
+      - /tmp/k3s-installation.sh
+      - --disable=traefik
+      - --flannel-backend
+      - none
   environment:
     INSTALL_K3S_CHANNEL: '{{ k3s_channel }}'
   changed_when: true
