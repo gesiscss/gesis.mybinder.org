@@ -21,8 +21,10 @@
   ansible.builtin.import_tasks:
     file: k3s.yml
 - name: Setting host facts regarding traefik
-  ansible.builtin.set_fact:
-    has_traefik: "{{ '/var/lib/rancher/k3s/server/manifests/traefik.yaml' is file }}"
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/traefik.yaml
+    state: file
+  register: has_traefik
 - name: Remove traefik manifest
   when: has_traefik
   ansible.builtin.file:
