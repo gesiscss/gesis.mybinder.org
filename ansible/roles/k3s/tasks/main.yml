@@ -21,31 +21,31 @@
   ansible.builtin.import_tasks:
     file: k3s.yml
 - name: Setting host facts regarding traefik
-  file:
+  ansible.builtin.file:
     path: /var/lib/rancher/k3s/server/manifests/traefik.yaml
     state: file
   register: has_traefik
 - name: Remove traefik manifest
-  when: has_traefik
+  when: has_traefik.stat.exists
   ansible.builtin.file:
     path: /var/lib/rancher/k3s/server/manifests/traefik.yaml
     state: absent
 - name: Remove traefik deployment
-  when: has_traefik
+  when: has_traefik.stat.exists
   kubernetes.core.helm:
     release_name: traefik
     release_namespace: kube-system
     state: absent
     wait: true
 - name: Remove traefik-crd deployment
-  when: has_traefik
+  when: has_traefik.stat.exists
   kubernetes.core.helm:
     release_name: traefik-crd
     release_namespace: kube-system
     state: absent
     wait: true
 - name: Restart K3s to remove traefik
-  when: has_traefik
+  when: has_traefik.stat.exists
   ansible.builtin.systemd_service:
     enabled: true
     name: k3s
