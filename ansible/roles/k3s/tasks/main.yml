@@ -58,8 +58,9 @@
     release_namespace: kube-system
     state: absent
     wait: true
-- name: Restart K3s to remove traefik
-  when: has_traefik.stat.exists
+# To allow high availability during upgrades,
+# the K3s containers continue running when the K3s service is stopped.
+- name: Restart K3s for changes to take effect
   ansible.builtin.systemd_service:
     enabled: true
     name: k3s
