@@ -10,8 +10,6 @@
     argv:
       - /tmp/k3s-installation.sh
       - --disable=traefik
-      - --flannel-backend
-      - none
   environment:
     INSTALL_K3S_CHANNEL: '{{ k3s_channel }}'
   changed_when: true
