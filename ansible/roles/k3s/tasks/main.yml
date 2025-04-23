@@ -14,14 +14,6 @@
     update_cache: true
     pkg:
       - curl
-- name: Create directory /etc if it does not exist
-  ansible.builtin.file:
-    path: /etc
-    state: directory
-    recurse: true
-    owner: root
-    group: root
-    mode: u=rwx,g=rx,o=rx
 - name: Generate /etc/kubelet.yaml
   ansible.builtin.copy:
     src: files/etc/kubelet.yaml
