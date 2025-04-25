@@ -12,4 +12,5 @@
       - --disable=traefik
   environment:
     INSTALL_K3S_CHANNEL: '{{ k3s_channel }}'
+    INSTALL_K3S_EXEC: "server --kubelet-arg=config=/etc/kubelet.yaml"
   changed_when: true

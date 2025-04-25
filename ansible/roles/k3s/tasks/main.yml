@@ -21,10 +21,7 @@
     owner: root
     group: root
     mode: u=rw,g=r,o=r
-- name: Populate service facts
-  ansible.builtin.service_facts:
 - name: Install K3s
-  when: ('k3s.service' not in ansible_facts.services)
   ansible.builtin.import_tasks:
     file: k3s.yml
 - name: Setting host facts regarding traefik
