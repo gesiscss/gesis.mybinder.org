@@ -9,6 +9,16 @@
 - name: Disable Firewall
   ansible.builtin.command: ufw disable
   changed_when: false
+- name: Configure instances for inotify
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_instances
+    value: '1280'
+    state: present
+- name: Configure watches for inotify
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_watches
+    value: '655360'
+    state: present
 - name: Install dependencies
   ansible.builtin.apt:
     update_cache: true
