@@ -19,4 +19,4 @@
     update_cache: true
     allow_downgrade: true
     pkg:
-      - helm=3.16.*
+      - helm=3.19.*
