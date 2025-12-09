@@ -11,7 +11,7 @@
     state: absent
 - name: Add Helm repository
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main"
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/helm.asc] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main"
     filename: kubernetes
     state: present
 - name: Install dependencies
