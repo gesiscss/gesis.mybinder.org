@@ -1,6 +1,6 @@
 services:
   sphinx:
-    image: docker-private.gesis.intra/rse/docker/images/sphinx-doc:2.3.1
+    image: docker-private.gesis.intra/rse/oc/sphinx-doc:3.3.0
     command: ["sphinx-autobuild", "--host", "0.0.0.0", "/mnt/docs/source", "/mnt/docs/build"]
     healthcheck:
       test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:8000"]
