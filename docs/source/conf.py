@@ -15,7 +15,7 @@ release = "YYYY.MM.DD"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx_rtd_theme",
+    "gesis_sphinx_theme",
     "sphinx_copybutton",
     "sphinxcontrib.mermaid",
 ]
@@ -28,7 +28,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "sphinx_rtd_theme"  # Documentation at https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html
+html_theme = "gesis"
 
 html_baseurl = "/binder.methodshub.gesis.org/"
 
@@ -45,7 +45,7 @@ html_context = {
     "display_gitlab": True,
     "gitlab_host": "git.gesis.org",
     "gitlab_user": "methods-hub",
-    "gitlab_repo": "binder.methodshub.gesis.org",
+    "gitlab_repo": "gesis.mybinder.org",
     "gitlab_version": "main",
     "conf_py_path": "/docs/source/",
 }
