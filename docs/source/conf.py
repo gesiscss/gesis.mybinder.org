@@ -45,7 +45,7 @@ html_context = {
     "display_gitlab": True,
     "gitlab_host": "git.gesis.org",
     "gitlab_user": "methods-hub",
-    "gitlab_repo": "binder.methodshub.gesis.org",
+    "gitlab_repo": "gesis.mybinder.org",
     "gitlab_version": "main",
     "conf_py_path": "/docs/source/",
 }
